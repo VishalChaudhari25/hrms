@@ -45,6 +45,7 @@ public class Employee {
 	private String homePhone;
 	private String company;
 	private String department;
+	private String jobTitle;
 	private String jobLevel;
 	private String salutation;
 	private String fatherName;
@@ -65,6 +66,13 @@ public class Employee {
 	private String zipCode;
 	private String country;
 	private String state;
+	
+	private String dependentName;
+	private String dependentAge;
+	private String dependentMobileNo;
+	private String dependentEmailId;
+	private String dependentRelation;
+
 
 	@ManyToOne
 	@JoinColumn(name = "admin_id")

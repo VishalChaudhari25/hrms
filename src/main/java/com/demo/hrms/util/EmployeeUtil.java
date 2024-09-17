@@ -145,6 +145,9 @@ public class EmployeeUtil {
 	    if (employeeDto.getDepartment() != null && !employeeDto.getDepartment().trim().isEmpty()) {
 	        employee.setDepartment(employeeDto.getDepartment());
 	    }
+	    if (employeeDto.getJobTitle() != null && !employeeDto.getJobTitle().trim().isEmpty()) {
+	        employee.setJobTitle(employeeDto.getJobTitle());
+	    }
 	    if (employeeDto.getJobLevel() != null && !employeeDto.getJobLevel().trim().isEmpty()) {
 	        employee.setJobLevel(employeeDto.getJobLevel());
 	    }
@@ -218,7 +221,26 @@ public class EmployeeUtil {
 	    if (employeeDto.getState() != null && !employeeDto.getState().trim().isEmpty()) {
 	        employee.setState(employeeDto.getState());
 	    }
-	    
+	    if (employeeDto.getDependentName() != null && !employeeDto.getDependentName().trim().isEmpty()) {
+	        employee.setDependentName(employeeDto.getDependentName());
+	    }
+
+	    if (employeeDto.getDependentAge() != null && !employeeDto.getDependentAge().trim().isEmpty()) {
+	        employee.setDependentAge(employeeDto.getDependentAge());
+	    }
+
+	    if (employeeDto.getDependentMobileNo() != null && !employeeDto.getDependentMobileNo().trim().isEmpty()) {
+	        employee.setDependentMobileNo(employeeDto.getDependentMobileNo());
+	    }
+
+	    if (employeeDto.getDependentEmailId() != null && !employeeDto.getDependentEmailId().trim().isEmpty()) {
+	        employee.setDependentEmailId(employeeDto.getDependentEmailId());
+	    }
+
+	    if (employeeDto.getDependentRelation() != null && !employeeDto.getDependentRelation().trim().isEmpty()) {
+	        employee.setDependentRelation(employeeDto.getDependentRelation());
+	    }
+
 	}
 
 	public void validateEmployeeDto(EmployeeDto employeeDto) {

@@ -2,6 +2,7 @@ package com.demo.hrms.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.context.annotation.Bean;
 
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,7 +21,12 @@ public class SecurityConfig {
 								"/admin/{adminId}/employees", "/employee/{employeeCode}",
 								"/admin/{adminId}/employees/{employeeCode}", 
 								"/employee/{employeeCode}/checkin", "employee/{employeeCode}/checkout","employee/{employeeCode}/attendance")
-						.permitAll().anyRequest().authenticated());
+						.permitAll().anyRequest().authenticated())
+						.sessionManagement(session -> session
+					            .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED) // Create a session if needed
+					            .maximumSessions(1) // Limit users to one session at a time
+					            .expiredUrl("/employee/login") // Redirect to login page on session expiration
+						);
 
 		return http.build();
 	}

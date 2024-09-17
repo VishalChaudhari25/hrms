@@ -39,6 +39,7 @@ public class EmployeeDto {
 	private String homePhone;
 	private String company;
 	private String department;
+	private String jobTitle;
 	private String jobLevel;
 	private String salutation;
 	private String fatherName;
@@ -60,17 +61,22 @@ public class EmployeeDto {
     private String country;
     private String state;
 
-    
-    private String standard;	
-	private String course;
-	private String boardUniversity;	
-	private String collegeInstitution;
-	private String subjects;	
-	private Integer passingYear;
-	private Double percentage;
-	private String skill;
-	private String experience;
-	private String level;
+    private String dependentName;
+	private String dependentAge;
+	private String dependentMobileNo;
+	private String dependentEmailId;
+	private String dependentRelation;
+   
+//    private String standard;	
+//	private String course;
+//	private String boardUniversity;	
+//	private String collegeInstitution;
+//	private String subjects;	
+//	private Integer passingYear;
+//	private Double percentage;
+//	private String skill;
+//	private String experience;
+//	private String level;
 	
 	
 	
@@ -106,6 +112,7 @@ public class EmployeeDto {
 	    this.homePhone = employee.getHomePhone();
 	    this.company = employee.getCompany();
 	    this.department = employee.getDepartment();
+	    this.jobTitle = employee.getJobTitle();
 	    this.jobLevel = employee.getJobLevel();
 	    this.salutation = employee.getSalutation();
 	    this.fatherName = employee.getFatherName();
@@ -126,6 +133,11 @@ public class EmployeeDto {
         this.zipCode = employee.getZipCode();
         this.country = employee.getCountry();
         this.state = employee.getState();
+        this.dependentName= employee.getDependentName();
+        this.dependentAge= employee.getDependentAge();
+        this.dependentMobileNo= employee.getDependentMobileNo();
+        this.dependentEmailId= employee.getDependentEmailId();
+        this.dependentRelation= employee.getDependentRelation();
 
         this.dateOfBirth = employee.getDateOfBirth().toString();
         this.dateOfJoining = employee.getDateOfJoining().toString();

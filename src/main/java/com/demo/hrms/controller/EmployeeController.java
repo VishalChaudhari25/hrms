@@ -1,4 +1,5 @@
 package com.demo.hrms.controller;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ import com.demo.hrms.exception.AttendanceNotFoundException;
 import com.demo.hrms.exception.InvalidAttendanceException;
 import com.demo.hrms.services.AttendanceService;
 import com.demo.hrms.services.EmployeeServices;
+
+import jakarta.servlet.http.HttpSession;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -46,35 +49,41 @@ public class EmployeeController {
 	public Employee getEmployeeByCode(@PathVariable String employeeCode) {
 		return employeeService.getEmployeeByCode(employeeCode);
 	}
-	
-	@PostMapping("/{employeeCode}/checkin")
-    public ResponseEntity<String> checkin(@PathVariable String employeeCode) {
-        try {
-            attendanceService.markCheckIn(employeeCode);
-            return ResponseEntity.ok("Check-in successful.");
-        } catch (InvalidAttendanceException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
 
-    @PostMapping("/{employeeCode}/checkout")
-    public ResponseEntity<String> checkout(@PathVariable String employeeCode) {
-        try {
-            attendanceService.markCheckOut(employeeCode);
-            return ResponseEntity.ok("Check-out successfull ");
-        } catch (InvalidAttendanceException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
-    
-    @GetMapping("/{employeeCode}/attendance")
-    public ResponseEntity<List<Attendance>> getAttendanceByEmployeeCode(@PathVariable String employeeCode) {
-        List<Attendance> attendanceList = attendanceService.getAttendanceByEmployeeCode(employeeCode);
-        if (attendanceList.isEmpty()) {
-            throw new AttendanceNotFoundException("No attendance records found for employee code: " + employeeCode);
-        }
-        return ResponseEntity.ok(attendanceList);
-    }
-    
+	@PostMapping("/{employeeCode}/checkin")
+	public ResponseEntity<String> checkin(@PathVariable String employeeCode) {
+		try {
+			attendanceService.markCheckIn(employeeCode);
+			return ResponseEntity.ok("Check-in successful.");
+		} catch (InvalidAttendanceException e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
+	}
+
+	@PostMapping("/{employeeCode}/checkout")
+	public ResponseEntity<String> checkout(@PathVariable String employeeCode) {
+		try {
+			attendanceService.markCheckOut(employeeCode);
+			return ResponseEntity.ok("Check-out successfull ");
+		} catch (InvalidAttendanceException e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
+	}
+
+	@GetMapping("/{employeeCode}/attendance")
+	public ResponseEntity<List<Attendance>> getAttendanceByEmployeeCode(@PathVariable String employeeCode) {
+		List<Attendance> attendanceList = attendanceService.getAttendanceByEmployeeCode(employeeCode);
+		if (attendanceList.isEmpty()) {
+			throw new AttendanceNotFoundException("No attendance records found for employee code: " + employeeCode);
+		}
+		return ResponseEntity.ok(attendanceList);
+	}
+
+	// Logout the employee manually and invalidate session
+	@PostMapping("/logout")
+	public ResponseEntity<String> logout(HttpSession session) {
+		session.invalidate();
+		return ResponseEntity.ok("Logged out successfully!");
+	}
 
 }
